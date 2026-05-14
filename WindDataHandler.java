@@ -48,7 +48,6 @@ public class WindDataHandler {
             }
 
             measurementsForDate.add(measurement);
-
         }
 
         System.out.println("Number of dates: " + windData.size());

@@ -15,7 +15,6 @@ public class WindMeasurement {
         public WindMeasurement(LocalDate date, LocalTime time, double windDirection, String windDirectionQuality, double windSpeed,
                                                                String windSpeedQuality) {
 
-
             this.date = date;
             this.time = time;
             this.windDirection = windDirection;

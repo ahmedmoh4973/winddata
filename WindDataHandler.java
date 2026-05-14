@@ -12,6 +12,9 @@ import java.util.*;
  */
 public class WindDataHandler {
 
+    private TreeMap<LocalDate, List<WindMeasurement>> windData = new TreeMap<>();
+
+
 	/**
 	 * Load wind data from file.
 	 *

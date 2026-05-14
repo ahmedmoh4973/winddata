@@ -25,8 +25,6 @@ public class WindDataHandler {
 	public void loadData(String filePath) throws IOException {
 		List<String> fileData = Files.readAllLines(Paths.get(filePath));  //O(n)
 
-        System.out.println("Number of lines: " + fileData.size());
-
         for (String line : fileData) {
 
             String[] parts = line.split(";");
@@ -40,8 +38,20 @@ public class WindDataHandler {
 
             WindMeasurement measurement = new WindMeasurement( date, time, windDirection, windDirectionQuality, windSpeed, windSpeedQuality);
 
-            System.out.println(measurement);
+            List<WindMeasurement> measurementsForDate = windData.get(date);
+
+            if (measurementsForDate == null) {
+
+                measurementsForDate = new ArrayList<>();
+
+                windData.put(date, measurementsForDate);
+            }
+
+            measurementsForDate.add(measurement);
+
         }
+
+        System.out.println("Number of dates: " + windData.size());
 
 		//TODO: Structure data and put it in appropriate data structure
 	}

@@ -15,6 +15,7 @@ public class WindDataHandler {
     private TreeMap<LocalDate, List<WindMeasurement>> windData = new TreeMap<>();
 
 
+
 	/**
 	 * Load wind data from file.
 	 *
@@ -26,9 +27,15 @@ public class WindDataHandler {
 
         System.out.println("Number of lines: " + fileData.size());
 
-        System.out.println(fileData.get(0));
-        System.out.println(fileData.get(1));
-        System.out.println(fileData.get(2));
+        String firstLine = fileData.get(0);
+        String[] parts = firstLine.split(";");
+
+        System.out.println(parts[0]);
+        System.out.println(parts[1]);
+        System.out.println(parts[2]);
+        System.out.println(parts[3]);
+        System.out.println(parts[4]);
+        System.out.println(parts[5]);
 
 		//TODO: Structure data and put it in appropriate data structure
 	}

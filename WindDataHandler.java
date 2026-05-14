@@ -70,6 +70,10 @@ public class WindDataHandler {
 
 		//TODO: Implement method
 		List<String> result = new ArrayList<>();
+		if(dateFrom.isAfter(dateTo)) {
+			return result;
+		}
+
 		return result;//O(1)
 	}
 

@@ -69,7 +69,8 @@ public class WindDataHandler {
 	public List<String> averageWindSpeed(LocalDate dateFrom, LocalDate dateTo) {
 
 		//TODO: Implement method
-		return null;  //O(1)
+		List<String> result = new ArrayList<>();
+		return result;//O(1)
 	}
 
 	/**

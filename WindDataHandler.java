@@ -27,15 +27,21 @@ public class WindDataHandler {
 
         System.out.println("Number of lines: " + fileData.size());
 
-        String firstLine = fileData.get(0);
-        String[] parts = firstLine.split(";");
+        for (String line : fileData) {
 
-        System.out.println(parts[0]);
-        System.out.println(parts[1]);
-        System.out.println(parts[2]);
-        System.out.println(parts[3]);
-        System.out.println(parts[4]);
-        System.out.println(parts[5]);
+            String[] parts = line.split(";");
+
+            LocalDate date = LocalDate.parse(parts[0]);
+            LocalTime time = LocalTime.parse(parts[1]);
+            double windDirection = Double.parseDouble(parts[2]);
+            String windDirectionQuality = parts[3];
+            double windSpeed = Double.parseDouble(parts[4]);
+            String windSpeedQuality = parts[5];
+
+            WindMeasurement measurement = new WindMeasurement( date, time, windDirection, windDirectionQuality, windSpeed, windSpeedQuality);
+
+            System.out.println(measurement);
+        }
 
 		//TODO: Structure data and put it in appropriate data structure
 	}

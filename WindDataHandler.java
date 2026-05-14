@@ -21,6 +21,12 @@ public class WindDataHandler {
 	public void loadData(String filePath) throws IOException {
 		List<String> fileData = Files.readAllLines(Paths.get(filePath));  //O(n)
 
+        System.out.println("Number of lines: " + fileData.size());
+
+        System.out.println(fileData.get(0));
+        System.out.println(fileData.get(1));
+        System.out.println(fileData.get(2));
+
 		//TODO: Structure data and put it in appropriate data structure
 	}
 

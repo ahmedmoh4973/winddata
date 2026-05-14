@@ -70,9 +70,11 @@ public class WindDataHandler {
 
 		//TODO: Implement method
 		List<String> result = new ArrayList<>();
+
 		if(dateFrom.isAfter(dateTo)) {
 			return result;
 		}
+        Map<LocalDate, List<WindMeasurement>> selectedData = windData.subMap(dateFrom, true, dateTo, true);
 
 		return result;//O(1)
 	}

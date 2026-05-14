@@ -76,7 +76,11 @@ public class WindDataHandler {
 		}
         Map<LocalDate, List<WindMeasurement>> selectedData = windData.subMap(dateFrom, true, dateTo, true);
 
-		return result;//O(1)
+        for (LocalDate date : selectedData.keySet()) {
+
+            System.out.println(date);
+        }
+		return result; //O(1)
 	}
 
 	/**

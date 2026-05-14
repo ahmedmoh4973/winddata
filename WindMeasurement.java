@@ -16,7 +16,6 @@ public class WindMeasurement {
                                                                String windSpeedQuality) {
 
 
-
             this.date = date;
             this.time = time;
             this.windDirection = windDirection;

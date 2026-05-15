@@ -30,4 +30,8 @@ public class WindMeasurement {
         return windSpeed;
     }
 
+    public LocalTime getTime() {
+        return time;
+    }
+
 }

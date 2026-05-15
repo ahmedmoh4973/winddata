@@ -26,4 +26,8 @@ public class WindMeasurement {
 
         }
 
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
 }

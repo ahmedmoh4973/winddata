@@ -127,6 +127,20 @@ public class WindDataHandler {
 	public List<String> highestWindSpeed(LocalDate dateFrom, LocalDate dateTo) {
 
 		//TODO: Implement method
-		return null;  //O(1)
+
+        List<String> result = new ArrayList<>();
+
+        if (dateFrom.isAfter(dateTo)) {
+            return result;
+        }
+
+        Map<LocalDate, List<WindMeasurement>> selectedData =
+                windData.subMap(dateFrom, true, dateTo, true);
+
+        for (LocalDate date : selectedData.keySet()) {
+
+        }
+
+        return result; //O(1)
 	}
 }

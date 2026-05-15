@@ -127,16 +127,22 @@ public class WindDataHandler {
 			for (WindMeasurement measurement : measurements) {
 
 			totalCount++;
-			if(measurement.getWindDirectionQuality().equals("Y")) {
+			if(measurement.getWindDirectionQuality().equals("G")) {
 				approvedCount++;
 			}
 			totalCount++;
-			if (measurement.getWindSpeedQuality().equals("Y")) {
+			if (measurement.getWindSpeedQuality().equals("G")) {
 				approvedCount++;
 			}
+			}
+			if (totalCount > 0) {
+				double percentage = ((double) approvedCount /totalCount ) * 100;
+
+				result.add(date + ": " + percentage + " % approved values" );
 
 			}
 		}
+
 		return result;  //O(1)
 	}
 

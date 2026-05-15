@@ -119,6 +119,23 @@ public class WindDataHandler {
 
 		for (LocalDate date : selectedData.keySet()) {
 
+			List<WindMeasurement> measurements = selectedData.get(date);
+
+			int approvedCount = 0;
+			int totalCount = 0;
+
+			for (WindMeasurement measurement : measurements) {
+
+			totalCount++;
+			if(measurement.getWindDirectionQuality().equals("Y")) {
+				approvedCount++;
+			}
+			totalCount++;
+			if (measurement.getWindSpeedQuality().equals("Y")) {
+				approvedCount++;
+			}
+
+			}
 		}
 		return result;  //O(1)
 	}

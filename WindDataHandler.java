@@ -139,6 +139,18 @@ public class WindDataHandler {
 
         for (LocalDate date : selectedData.keySet()) {
 
+            List<WindMeasurement> measurements = selectedData.get(date);
+
+            double highestSpeed = -1;
+            LocalTime highestTime = null;
+
+            for (WindMeasurement measurement : measurements) {
+
+                if (measurement.getWindSpeed() > highestSpeed) {
+                    highestSpeed = measurement.getWindSpeed();
+                    highestTime = measurement.getTime();
+                }
+            }
         }
 
         return result; //O(1)

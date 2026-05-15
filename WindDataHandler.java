@@ -17,6 +17,7 @@ public class WindDataHandler {
 
 	/**
 	 * Load wind data from file.
+     * Time complexity: O(n log n)
 	 *
 	 * @param filePath path to file with weather data
 	 * @throws IOException if there is a problem while reading the file
@@ -51,6 +52,8 @@ public class WindDataHandler {
 	 * 2000-01-01 average wind speed: 4.29 m/s
 	 * 2000-01-02 average wind speed: 6.48 m/s
 	 * 2000-01-03 average wind speed: 5.74 m/s
+     *
+     * Time complexity: O(log n + k)
 	 *
 	 * @param dateFrom start date (YYYY-MM-DD) inclusive
 	 * @param dateTo   end date (YYYY-MM-DD) inclusive
@@ -91,6 +94,8 @@ public class WindDataHandler {
 	 * 2000-01-01: 33.33 % approved values
 	 * 2000-01-02: 34.78 % approved values
 	 * 2000-01-03: 34.78 % approved values
+     *
+     * Time complexity: O(log n + k)
 	 *
 	 * @param dateFrom start date (YYYY-MM-DD) inclusive
 	 * @param dateTo   end date (YYYY-MM-DD) inclusive
@@ -138,6 +143,8 @@ public class WindDataHandler {
 	 * 2000-01-01 05:00: 5.0 m/s
 	 * 2000-01-02 11:00: 9.0 m/s
 	 * 2000-01-03 17:00: 9.0 m/s
+     *
+     * Time complexity: O(log n + k)
 	 *
 	 * @param dateFrom start date (YYYY-MM-DD) inclusive
 	 * @param dateTo   end date (YYYY-MM-DD) inclusive

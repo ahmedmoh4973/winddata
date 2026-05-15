@@ -33,5 +33,13 @@ public class WindMeasurement {
     public LocalTime getTime() {
         return time;
     }
+    public String getWindDirectionQuality() {
+        return windDirectionQuality;
+    }
+
+    public String getWindSpeedQuality() {
+        return windSpeedQuality;
+    }
+
 
 }

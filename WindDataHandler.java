@@ -151,8 +151,12 @@ public class WindDataHandler {
                     highestTime = measurement.getTime();
                 }
             }
-        }
 
+            if (highestTime != null) {
+                result.add(date + " " + highestTime + ": "
+                        + highestSpeed + " m/s");
+            }
+        }
         return result; //O(1)
 	}
 }

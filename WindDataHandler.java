@@ -15,7 +15,6 @@ public class WindDataHandler {
     private TreeMap<LocalDate, List<WindMeasurement>> windData = new TreeMap<>();
 
 
-
 	/**
 	 * Load wind data from file.
 	 *
@@ -28,7 +27,6 @@ public class WindDataHandler {
         for (String line : fileData) { // O(n)
 
             String[] parts = line.split(";"); // O(1)
-
             LocalDate date = LocalDate.parse(parts[0]); //  O(1)
             LocalTime time = LocalTime.parse(parts[1]); // O(1)
             double windDirection = Double.parseDouble(parts[2]); // O(1)
@@ -41,17 +39,11 @@ public class WindDataHandler {
             List<WindMeasurement> measurementsForDate = windData.get(date); //  O( log n)
 
             if (measurementsForDate == null) { //  O(1)
-
                 measurementsForDate = new ArrayList<>(); //  O(1)
-
                 windData.put(date, measurementsForDate); //  O(log n)
             }
-
             measurementsForDate.add(measurement); //  O(1)
         }
-
-        System.out.println("Number of dates: " + windData.size());
-
 	}
 	/**
 	 * Search for average wind speed for dates. Result is sorted by date (ascending).
@@ -71,10 +63,10 @@ public class WindDataHandler {
 		if(dateFrom.isAfter(dateTo)) { //  O(1)
 			return result; //  O(1)
 		}
+
         Map<LocalDate, List<WindMeasurement>> selectedData = windData.subMap(dateFrom, true, dateTo, true); //  O(log n)
 
         for (LocalDate date : selectedData.keySet()) { //  O(k)
-
             List<WindMeasurement> measurements = selectedData.get(date); //  O(1)
 
             double sum = 0; //  O(1)
@@ -105,9 +97,8 @@ public class WindDataHandler {
 	 * @return approved values for each date, sorted by date
 	 */
 	public List<String> approvedValues(LocalDate dateFrom, LocalDate dateTo) {
+        List<String> result = new ArrayList<>(); //  O(1)
 
-
-		List<String> result = new ArrayList<>(); //  O(1)
 		if (dateFrom.isAfter(dateTo)) { //  O(1)
 			return result; //  O(1)
 		}
@@ -115,18 +106,18 @@ public class WindDataHandler {
 		Map<LocalDate,List<WindMeasurement>> selectedData = windData.subMap(dateFrom, true, dateTo,true); //  O(log n)
 
 		for (LocalDate date : selectedData.keySet()) { //  O(k)
-
-			List<WindMeasurement> measurements = selectedData.get(date); //  O(1)
+            List<WindMeasurement> measurements = selectedData.get(date); //  O(1)
 
 			int approvedCount = 0; //  O(1)
 			int totalCount = 0; //  O(1)
 
 			for (WindMeasurement measurement : measurements) { //  O(k)
+                totalCount++; //  O(1)
 
-			totalCount++; //  O(1)
 			if(measurement.getWindDirectionQuality().equals("G")) { //  O(1)
 				approvedCount++; //  O(1)
 			}
+
 			totalCount++; //  O(1)
 			if (measurement.getWindSpeedQuality().equals("G")) { //  O(1)
 				approvedCount++; //  O(1)
@@ -136,10 +127,8 @@ public class WindDataHandler {
 				double percentage = ((double) approvedCount /totalCount ) * 100; //  O(1)
 
 				result.add(date + ": " + percentage + " % approved values" ); //  O(1)
-
 			}
 		}
-
 		return result;  //O(1)
 	}
 
@@ -156,8 +145,6 @@ public class WindDataHandler {
 	 */
 	public List<String> highestWindSpeed(LocalDate dateFrom, LocalDate dateTo) {
 
-
-
         List<String> result = new ArrayList<>(); //  O(1)
 
         if (dateFrom.isAfter(dateTo)) { //  O(1)
@@ -168,7 +155,6 @@ public class WindDataHandler {
                 windData.subMap(dateFrom, true, dateTo, true); //  O(log n)
 
         for (LocalDate date : selectedData.keySet()) { //  O(k)
-
             List<WindMeasurement> measurements = selectedData.get(date); //  O(1)
 
             double highestSpeed = -1; //  O(1)
@@ -181,7 +167,6 @@ public class WindDataHandler {
                     highestTime = measurement.getTime(); //  O(1)
                 }
             }
-
             if (highestTime != null) { //  O(1)
                 result.add(date + " " + highestTime + ": " + highestSpeed + " m/s"); //  O(1)
             }

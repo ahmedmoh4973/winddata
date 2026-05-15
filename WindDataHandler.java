@@ -25,36 +25,34 @@ public class WindDataHandler {
 	public void loadData(String filePath) throws IOException {
 		List<String> fileData = Files.readAllLines(Paths.get(filePath));  //O(n)
 
-        for (String line : fileData) {
+        for (String line : fileData) { // O(n)
 
-            String[] parts = line.split(";");
+            String[] parts = line.split(";"); // O(1)
 
-            LocalDate date = LocalDate.parse(parts[0]);
-            LocalTime time = LocalTime.parse(parts[1]);
-            double windDirection = Double.parseDouble(parts[2]);
-            String windDirectionQuality = parts[3];
-            double windSpeed = Double.parseDouble(parts[4]);
-            String windSpeedQuality = parts[5];
+            LocalDate date = LocalDate.parse(parts[0]); //  O(1)
+            LocalTime time = LocalTime.parse(parts[1]); // O(1)
+            double windDirection = Double.parseDouble(parts[2]); // O(1)
+            String windDirectionQuality = parts[3]; //  O(1)
+            double windSpeed = Double.parseDouble(parts[4]); //  O(1)
+            String windSpeedQuality = parts[5]; //  O(1)
 
-            WindMeasurement measurement = new WindMeasurement( date, time, windDirection, windDirectionQuality, windSpeed, windSpeedQuality);
+            WindMeasurement measurement = new WindMeasurement( date, time, windDirection, windDirectionQuality, windSpeed, windSpeedQuality); //  O(1)
 
-            List<WindMeasurement> measurementsForDate = windData.get(date);
+            List<WindMeasurement> measurementsForDate = windData.get(date); //  O( log n)
 
-            if (measurementsForDate == null) {
+            if (measurementsForDate == null) { //  O(1)
 
-                measurementsForDate = new ArrayList<>();
+                measurementsForDate = new ArrayList<>(); //  O(1)
 
-                windData.put(date, measurementsForDate);
+                windData.put(date, measurementsForDate); //  O(log n)
             }
 
-            measurementsForDate.add(measurement);
+            measurementsForDate.add(measurement); //  O(1)
         }
 
         System.out.println("Number of dates: " + windData.size());
 
-		//TODO: Structure data and put it in appropriate data structure
 	}
-
 	/**
 	 * Search for average wind speed for dates. Result is sorted by date (ascending).
 	 * When searching from 2000-01-01 to 2000-01-03 the result should be:
@@ -68,29 +66,28 @@ public class WindDataHandler {
 	 */
 	public List<String> averageWindSpeed(LocalDate dateFrom, LocalDate dateTo) {
 
-		//TODO: Implement method
-		List<String> result = new ArrayList<>();
+		List<String> result = new ArrayList<>(); //  O(1)
 
-		if(dateFrom.isAfter(dateTo)) {
-			return result;
+		if(dateFrom.isAfter(dateTo)) { //  O(1)
+			return result; //  O(1)
 		}
-        Map<LocalDate, List<WindMeasurement>> selectedData = windData.subMap(dateFrom, true, dateTo, true);
+        Map<LocalDate, List<WindMeasurement>> selectedData = windData.subMap(dateFrom, true, dateTo, true); //  O(log n)
 
-        for (LocalDate date : selectedData.keySet()) {
+        for (LocalDate date : selectedData.keySet()) { //  O(k)
 
-            List<WindMeasurement> measurements = selectedData.get(date);
+            List<WindMeasurement> measurements = selectedData.get(date); //  O(1)
 
-            double sum = 0;
-            int count = 0;
+            double sum = 0; //  O(1)
+            int count = 0; //  O(1)
 
-            for (WindMeasurement measurement : measurements) {
-                sum = sum + measurement.getWindSpeed();
-                count++;
+            for (WindMeasurement measurement : measurements) { //  O(k)
+                sum = sum + measurement.getWindSpeed(); //  O(1)
+                count++; //  O(1)
             }
 
-            if (count > 0) {
-                double average = sum / count;
-                result.add(date + " average wind speed: " + average + " m/s");
+            if (count > 0) { //  O(1)
+                double average = sum / count; //  O(1)
+                result.add(date + " average wind speed: " + average + " m/s"); //  O(1)
             }
         }
 		return result; //O(1)
@@ -109,36 +106,36 @@ public class WindDataHandler {
 	 */
 	public List<String> approvedValues(LocalDate dateFrom, LocalDate dateTo) {
 
-		//TODO: Implement method
-		List<String> result = new ArrayList<>();
-		if (dateFrom.isAfter(dateTo)) {
-			return result;
+
+		List<String> result = new ArrayList<>(); //  O(1)
+		if (dateFrom.isAfter(dateTo)) { //  O(1)
+			return result; //  O(1)
 		}
 
-		Map<LocalDate,List<WindMeasurement>> selectedData = windData.subMap(dateFrom, true, dateTo,true);
+		Map<LocalDate,List<WindMeasurement>> selectedData = windData.subMap(dateFrom, true, dateTo,true); //  O(log n)
 
-		for (LocalDate date : selectedData.keySet()) {
+		for (LocalDate date : selectedData.keySet()) { //  O(k)
 
-			List<WindMeasurement> measurements = selectedData.get(date);
+			List<WindMeasurement> measurements = selectedData.get(date); //  O(1)
 
-			int approvedCount = 0;
-			int totalCount = 0;
+			int approvedCount = 0; //  O(1)
+			int totalCount = 0; //  O(1)
 
-			for (WindMeasurement measurement : measurements) {
+			for (WindMeasurement measurement : measurements) { //  O(k)
 
-			totalCount++;
-			if(measurement.getWindDirectionQuality().equals("G")) {
-				approvedCount++;
+			totalCount++; //  O(1)
+			if(measurement.getWindDirectionQuality().equals("G")) { //  O(1)
+				approvedCount++; //  O(1)
 			}
-			totalCount++;
-			if (measurement.getWindSpeedQuality().equals("G")) {
-				approvedCount++;
+			totalCount++; //  O(1)
+			if (measurement.getWindSpeedQuality().equals("G")) { //  O(1)
+				approvedCount++; //  O(1)
 			}
 			}
-			if (totalCount > 0) {
-				double percentage = ((double) approvedCount /totalCount ) * 100;
+			if (totalCount > 0) { //  O(1)
+				double percentage = ((double) approvedCount /totalCount ) * 100; //  O(1)
 
-				result.add(date + ": " + percentage + " % approved values" );
+				result.add(date + ": " + percentage + " % approved values" ); //  O(1)
 
 			}
 		}
@@ -159,35 +156,34 @@ public class WindDataHandler {
 	 */
 	public List<String> highestWindSpeed(LocalDate dateFrom, LocalDate dateTo) {
 
-		//TODO: Implement method
 
-        List<String> result = new ArrayList<>();
 
-        if (dateFrom.isAfter(dateTo)) {
-            return result;
+        List<String> result = new ArrayList<>(); //  O(1)
+
+        if (dateFrom.isAfter(dateTo)) { //  O(1)
+            return result; //  O(1)
         }
 
-        Map<LocalDate, List<WindMeasurement>> selectedData =
-                windData.subMap(dateFrom, true, dateTo, true);
+        Map<LocalDate, List<WindMeasurement>> selectedData = //  O(log n)
+                windData.subMap(dateFrom, true, dateTo, true); //  O(log n)
 
-        for (LocalDate date : selectedData.keySet()) {
+        for (LocalDate date : selectedData.keySet()) { //  O(k)
 
-            List<WindMeasurement> measurements = selectedData.get(date);
+            List<WindMeasurement> measurements = selectedData.get(date); //  O(1)
 
-            double highestSpeed = -1;
-            LocalTime highestTime = null;
+            double highestSpeed = -1; //  O(1)
+            LocalTime highestTime = null; //  O(1)
 
-            for (WindMeasurement measurement : measurements) {
+            for (WindMeasurement measurement : measurements) { //  O(k)
 
-                if (measurement.getWindSpeed() > highestSpeed) {
-                    highestSpeed = measurement.getWindSpeed();
-                    highestTime = measurement.getTime();
+                if (measurement.getWindSpeed() > highestSpeed) { //  O(1)
+                    highestSpeed = measurement.getWindSpeed(); //  O(1)
+                    highestTime = measurement.getTime(); //  O(1)
                 }
             }
 
-            if (highestTime != null) {
-                result.add(date + " " + highestTime + ": "
-                        + highestSpeed + " m/s");
+            if (highestTime != null) { //  O(1)
+                result.add(date + " " + highestTime + ": " + highestSpeed + " m/s"); //  O(1)
             }
         }
         return result; //O(1)

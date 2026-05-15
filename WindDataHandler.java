@@ -78,7 +78,20 @@ public class WindDataHandler {
 
         for (LocalDate date : selectedData.keySet()) {
 
-            System.out.println(date);
+            List<WindMeasurement> measurements = selectedData.get(date);
+
+            double sum = 0;
+            int count = 0;
+
+            for (WindMeasurement measurement : measurements) {
+                sum = sum + measurement.getWindSpeed();
+                count++;
+            }
+
+            if (count > 0) {
+                double average = sum / count;
+                result.add(date + " average wind speed: " + average + " m/s");
+            }
         }
 		return result; //O(1)
 	}
